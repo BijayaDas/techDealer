@@ -57,8 +57,13 @@ choose adaptor in models.js
 
 # todo:
 1 - Upgrading the application to sails V0.12
+
 2 - Integrating Template.
+
 3 - Limiting Login to Admin and shutdown of sign up services.
+
 4 - make comments free from login.
+
 5 - add reputation management, -> Likes + Views.(simple and straight no undo feature, these features will be independent from login.)
+
 6 - Migrate the project to latest standard of sails and mention the version names of packages in package.json
