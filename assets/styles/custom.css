@@ -1,0 +1,126 @@
+body {
+  background-image: url("http://i.imgur.com/xskrTUY.png");
+}
+
+.phone-number::before {
+  content: "(206) ";
+}
+
+.small-caps {
+  text-transform: uppercase;
+}
+
+.flexlist h4 {
+  display: inline-block;
+}
+
+.flexlist {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .flexlist li {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin: auto 5px;
+  }
+  .sidebar {
+    display: block;
+  }
+}
+
+@media (max-width: 992px) {
+  .affix {
+    position: inherit;
+  }
+
+  .flexlist li {
+    display: inline-block;
+  }
+  .sidebar {
+    float: right;
+  }
+  .title-box-container {
+    float: left;
+  }
+}
+
+@media (min-width: 992px){
+  .affix {
+    width: 212.500px;
+    top: 0;
+  }
+  .affix-top {
+      position: static;
+      width: auto;
+      top: 0;
+  }
+  .affix-bottom {
+      position: absolute;
+  }
+  .sidenav{
+    width: 212.500px; 
+    position: fixed; 
+    /*margin: -135px 0 0 410px;*/
+  }
+  .flexlist li {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+.list-collapse li {
+  display: inline-block;
+}
+
+.list-collapse li:first-child {
+  display: block;
+}
+
+.sidebar {
+  display: block;
+}
+
+.title-box-container {
+  display: inline-block;
+}
+
+.title-box {
+  display: table;
+}
+
+.layout-title {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 26px;
+}
+
+.comment {
+  margin-bottom: 30px;
+}
+
+.comment-children {
+  -webkit-transition: .125s linear;
+  -moz-transition: .125s linear;
+  -ms-transition: .125s linear;
+  -o-transition: .125s linear;
+  transition: .125s linear;
+}
+
+/* random css */
+.inline-form {
+  display: inline-block;
+}
+
+
+.logo-image {
+  width: 100px;
+}
+
+.hellobar_logo{
+  display: none !important;
+}
+
+.comment-reply-form {
+  display: none;
+}

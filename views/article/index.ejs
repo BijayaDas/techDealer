@@ -1,0 +1,32 @@
+<div class="blog-header">
+  <h1>
+  <p class="lead blog-description">
+    <em><%= page_title %></em>
+  </p>
+  </h1>
+
+</div>
+<% pinned_articles = articles.filter(function(article){ 
+  return article.pinned === true
+}) %>
+<% if(pinned_articles.length > 0){ %>
+<div class='well'>
+  <% pinned_articles.forEach(function(article){ %>
+    <%- partial('partials/article', {article: article, snippet: true}) %>
+  <% }) %>
+</div>
+<% } %>
+
+<% unpinned_articles = articles.filter(function(article){ 
+  return article.pinned !== true
+}) %>
+<% unpinned_articles.forEach(function(article){ %>
+  <%- partial('partials/article', {article: article, snippet: true}) %>
+<% }) %>
+
+<% if(articles.length === 0){ %>
+  <h1>
+    <a href="/user/new">Create your Admin Account to get Started</a>
+  </h1>
+<% } %>
+

@@ -1,0 +1,43 @@
+{
+  "name": "techdealer-blog",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "sails": "*",
+    "sails-disk": "*",
+    "rc": "*",
+    "include-all": "*",
+    "ejs": "*",
+    "grunt": "*",
+    "grunt-sync": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-sails-linker": "*",
+    "grunt-contrib-jst": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-coffee": "*",
+    "moment": "*",
+    "sails-mongo": "*",
+    "bcrypt": "*",
+    "rss": "*",
+    "url-seo-scrubber": "*",
+    "marked": "*"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "*"
+  },
+  "author": "Bijay Das",
+  "license": "MIT"
+}

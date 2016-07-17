@@ -1,0 +1,46 @@
+<div class='blog-post' itemscope itemtype="http://schema.org/BlogPosting">
+  <% 
+   snippet = typeof(snippet) !== typeof(undefined);
+  %>
+  <!-- could also be req.options.action -->
+  
+  <h1 class='blog-post-title'>
+    <a itemprop="url" href="/article/<%= article.id %>/<%= article.cleanTitle() %>">
+      <span itemprop="name"><%= article.title %></span>
+    </a>
+  </h1>
+
+  <div class="blog-post-body" itemprop="articleBody" >
+    <!-- 'click to see more' -->
+    <% if(snippet){ %>
+      <%- article.bodyHTML() %>
+    <% }else{ %>
+      <%- article.bodyHTML() %>
+    <% } %>
+  </div>
+  <% if(req.session.authenticated){ %>
+    <small><a href="/article/<%= article.id %>/edit">Edit Article</a></small>
+
+    <form action='/article/<%= article.id %>/delete' class="inline-form" method="post">
+      <div>
+        <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+        <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+      </div>
+    </form>
+  <% } %>
+
+  <p class="blog-post-meta">
+    published <span itemprop="datePublished" content="<%= article.createdAt %>"><%= article.published_at() %></span>
+  </p>
+  <div class="blog-post-foot">
+    <% if(snippet){ %>
+      <a href="/article/<%= article.id %>/<%= article.cleanTitle() %>/#comments">
+        <%= article.comments.length %> Comments
+      </a>
+    <% } %>
+    <div class='tweet-button pull-right'>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://<%= sails.config.sitesettings.domain %>/article/<%= article.id %>/<%= article.cleanTitle() %>" data-text="<%= article.cleanTitle() %>" data-via="<%= sails.config.sitesettings.twitter_username %>">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+  </div><!-- foot -->
+</div>

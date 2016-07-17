@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><% 
+    full_title = sails.config.sitesettings.base_page_title
+    if(typeof(page_title) == typeof("string")){
+      full_title = page_title + " - " + full_title
+    }
+    %>
+    <%= full_title %>
+  </title>
+    <link rel="author" href="https://plus.google.com/<%= sails.config.sitesettings.google_plus_id %>">
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+    <!--  
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage 
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/linker/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+        
+        To customize any part of the built-in behavior, just edit your Gruntfile.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/blog.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/comment-replies.css">
+    <link rel="stylesheet" href="/styles/custom.css">
+    <link rel="stylesheet" href="/styles/font-awesome.css">
+    <link rel="stylesheet" href="/styles/ghostdown.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/signin.css">
+    <link rel="stylesheet" href="/styles/social-buttons.css">
+    <!--STYLES END-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '<%= sails.config.sitesettings.google_analytics_ua %>', '<%= sails.config.sitesettings.domain %>');
+      ga('send', 'pageview');
+
+    </script>
+
+    <style type="text/css">
+      /* hide hellobar logo */
+      a#hellobar_logo, a#hellobar_logo:link, a#hellobar_logo:visited {
+        display:none !important;
+      }
+    </style>
+  </head>
+
+  <body>
+  <% if(req.session.authenticated) { %>  
+    <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand">Admin:</span>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li><a href="/article/new">New Blog Article</a></li>
+            <li><a href="/page">Edit Pages</a></li>
+            <li><a href="/admin/panel">Website Settings </a></li>
+            <li><a href="/admin/edit">Edit Login </a></li>
+            <li><a href="/session/destroy">Sign Out</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  <% }%>
+
+
+    <div class='container'>
+      <!-- Include the view file for the current controller/route -->
+      <div class='row'>
+        <div class='col-md-3'> 
+          <nav class='nav sidenav'>
+            <div class='title-box-container'>
+              <div class="title-box media">
+                <img class="logo-image img-circle img-thumbnail pull-left" src="<%= sails.config.sitesettings.logo_url %>">
+                <h4 class="text-muted layout-title"><a href="/"><%= sails.config.sitesettings.website_title %></a>
+                </h4>
+              </div>
+            </div>
+            <div class='well sidebar sidebar-module sidebar-module-inset'>
+              <!-- <h6 class='small-caps'>Contact me</h6> -->
+              <ul class='list-unstyled flexlist'>
+                <!-- <li>Primary Contacts:</li> -->
+                <% if(sails.config.sitesettings.show_contact_email){ %>
+                  <li>
+                    <i class="fa fa-envelope"></i> <%= sails.config.sitesettings.contact_email %>
+                  </li>
+                <% } %>
+                <% if(sails.config.sitesettings.show_phone_number){ %>
+                  <li>
+                    <i class='fa fa-phone'></i> <span class='phone-number'><%= sails.config.sitesettings.phone_number %></span>
+                  </li>
+                <% } %>
+                <% 
+                social_networks = sails.config.sitesettings.shown_social_networks.split(/\s*,\s*/);
+                _.each(social_networks, function(network){ %>
+                  <li>
+                    <% 
+                      site = {
+                        platform: network,
+                        link: sails.config.sitesettings[network+"_link"],
+                        display_name: sails.config.sitesettings[network+"_display_name"]
+                      }
+                    %>
+                    <a class="btn btn-xs btn-<%= site.platform %>" href="<%= site.link %>"><i class="fa fa-<%= site.platform %>"></i> <%= site.display_name %></a>
+                  </li>
+                <% }) %>
+                
+              </ul>
+              
+              <ul class='list-unstyled flexlist'>
+<!--                 <li>
+                  <h4><a href="/contact">Contact Me</a></h4>
+                </li>
+                <li>
+                  <h4><a href="/about">About Me</a></h4>
+                </li> -->
+                <% _.each(res.locals.nav_pages, function(page){ %>
+                  <li>
+                    <h4>
+                      <a href='/<%= page.clean_title || page.id %>'>
+                        <%= page.title %>
+                      </a>
+                    </h4>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class='col-md-9'>
+          <% if (flash && flash.err) { %>
+            <ul class='alert'>
+              <% Object.keys(flash.err).forEach(function(error){ %>  
+                <li><%= JSON.stringify(flash.err[error]) %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+
+          <div class='blog-main'>
+            <%- body %>
+          </div>
+        </div>
+      </div>
+      <div class='row footer'>
+      </div>
+      
+    </div>
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/linker/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+        
+        To customize this behavior to fit your needs, just edit your Gruntfile.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, filesin your `assets/linker/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+      
+      To customize any part of the built-in behavior, just edit your Gruntfile.
+      For example, here are a few things you could do:
+          
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/epiceditor.js"></script>
+    <script src="/js/frontend.js"></script>
+    <script src="/js/ghostdown.js"></script>
+    <!--SCRIPTS END-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var markdown_field = document.getElementById('markdown_field')
+      if(markdown_field !== null){
+        // console.log('loading editor!!');
+        markdown_field.style.display = 'none';
+        var editor = new EpicEditor({'textarea': 'markdown_field', 'basePath':''}).load();
+      } else{
+        // console.log('not loading editor')
+      }
+    </script>
+    <!-- Hello Bar -->
+    <% if(req.session.authenticated){
+    }else if(sails.config.sitesettings.hello_bar_enabled){ %>
+    <script type="text/javascript" src="//s3.amazonaws.com/scripts.hellobar.com/<%= sails.config.sitesettings.hello_bar_id %>.js">
+    </script>
+    <% } %>
+  </body>
+</html>
