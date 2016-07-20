@@ -37,7 +37,7 @@ module.exports.routes = {
   // },
   
   'get /login': {
-       view: 'login'
+       view: 'user/login'
   },
 
   'post /login': 'AuthController.login',
@@ -45,7 +45,7 @@ module.exports.routes = {
   '/logout': 'AuthController.logout',
 
   'get /signup': {
-    view: 'signup'
+    view: 'user/signup'
   },
 
   '/': 'ArticleController.index',
