@@ -85,7 +85,8 @@ module.exports = {
   edit: function (req, res) {
     Article.findOne(req.param('id')).exec(function (err, article){
       if (err) return next(err);
-      // console.log(articles)
+      console.log(article);
+      console.log(err);
       res.view({
         article: (article || []),
         error: err

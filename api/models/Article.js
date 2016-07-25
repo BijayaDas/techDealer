@@ -8,15 +8,11 @@
 var moment = require('moment')
 // var markdown = require('markdown').markdown;
 var marked = require('marked');
-var scrub = require('url-seo-scrubber');
+var getSlug = require('speakingurl');
 
 module.exports = {
 
   attributes: {
-    pinned: {
-      type: 'boolean',
-      defaultsTo: false
-    },
     title : { 
       type: 'string',
       required: true 
@@ -24,7 +20,7 @@ module.exports = {
     clean_title : { type: 'string' },
     cleanTitle: function(){
       if(typeof(this.clean_title) !== typeof('string')){
-        this.clean_title = scrub(this.title)
+        this.clean_title = getSlug(this.title)
         this.save(function(err) {
           console.log(err);
         });
@@ -33,10 +29,15 @@ module.exports = {
     },
 
     body : { type: 'string' },
+    episode : { type: 'integer' },
 
     comments : {
       collection: 'comment',
       via: 'article'
+    },
+    // Add a reference to User
+    subject: {
+      model: 'course'
     },
     published_at: function(){
       return moment(this.createdAt).format('LLL')
@@ -48,7 +49,7 @@ module.exports = {
   },
   // Lifecycle Callbacks
   beforeCreate: function(values, next) {
-    values.clean_title = scrub(values.title);
+    values.clean_title = getSlug(values.title);
     next();
   }
 };

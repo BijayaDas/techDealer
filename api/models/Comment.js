@@ -15,6 +15,14 @@ module.exports = {
 
   attributes: {
     owner: 'string',
+    name: {
+      type:'string',
+      required: true
+    },
+    email: {
+      type:'string',
+      required: true
+    },
     text: {
       type:'string',
       required: true

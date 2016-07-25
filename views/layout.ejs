@@ -1,15 +1,63 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
+  <!-- BEGIN HEAD -->
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
 
+
+    <!-- BEGIN LAYOUT FIRST STYLES -->
+    <link href="//fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css" />
+    <!-- END LAYOUT FIRST STYLES -->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="/styles/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+   <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <%if (req.route.path == '/login') { %>
+        <link href="/styles/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="/styles/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <% } %>
+    <%if (req.route.path == '/article/new') { %>
+      <link href="/styles/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
+    <% } %>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/styles/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/styles/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <% if (req.route.path == '/article') { %>
+     <link href="/styles/pages/css/blog.min.css" rel="stylesheet" type="text/css" /> 
+     <% } %>
+    <% if (req.route.path == '/login') { %>
+        <link href="/styles/pages/css/login-5.min.css" rel="stylesheet" type="text/css" />
+    <% } %>
+    <%- console.log(req.route) %>
+    <% if (req.route.path == '/article/:id/:slug?')  { %>
+      <link href="/styles/pages/css/blog.min.css" rel="stylesheet" type="text/css" />
+    <% } %>
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <%if (req.route.path != '/login') { %>
+    <link href="/styles/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <% } %>
+    <!-- END THEME LAYOUT STYLES -->
+
+    <link rel="shortcut icon" href="favicon.ico" /> 
+
     <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /> -->
 
     <!--
@@ -37,6 +85,7 @@
     
     <!--STYLES END-->
   </head>
+  <!-- END HEAD -->
 
   <body class="page-header-fixed page-sidebar-closed-hide-logo">
     <%- body %>
@@ -95,5 +144,49 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="/js/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="/js/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="/js/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="/js/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <%if (req.route.path == '/login') { %>
+      <script src="/js/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+      <script src="/js/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+      <script src="/js/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+      <script src="/js/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+    <% } %>
+    <%if (req.route.path == '/article/new') { %>
+      <script src="/js/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+    <% } %>
+    <%if (req.route.path == '/signup') { %>
+      <script src="/js/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+      <script src="/js/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <% } %>
+<!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="/js/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <%if (req.route.path == '/login') { %>
+        <script src="/js/pages/scripts/login-5.min.js" type="text/javascript"></script>
+    <% } %>
+    <%if (req.route.path == '/article/new') { %>
+      <script src="/js/pages/scripts/components-editors.min.js" type="text/javascript"></script>
+      <!-- <script src="/js/pages/scripts/form-validation-md.min.js" type="text/javascript"></script>  -->
+    <% } %>
+    <%if (req.route.path == '/signup') { %>
+      <script src="/js/pages/scripts/form-validation-md.min.js" type="text/javascript"></script>
+    <% } %>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <%if (req.route.path != '/login') { %>
+      <script src="/js/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>
+      <script src="/js/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <% } %>
+    <!-- END THEME LAYOUT SCRIPTS -->
   </body>
 </html>
