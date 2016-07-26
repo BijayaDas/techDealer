@@ -23,7 +23,7 @@ module.exports = {
       type:'string',
       required: true
     },
-    text: {
+    message: {
       type:'string',
       required: true
     },
@@ -47,4 +47,3 @@ module.exports = {
     }
   }
 };
-

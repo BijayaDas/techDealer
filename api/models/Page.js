@@ -8,24 +8,24 @@
 var moment = require('moment')
 // var markdown = require('markdown').markdown;
 var marked = require('marked');
-var scrub = require('url-seo-scrubber');
+var scrub = require('speakingurl');
 
 module.exports = {
 
   attributes: {
-    title : { 
+    title : {
       type: 'string',
-      required: true 
+      required: true
     },
     clean_title : { type: 'string' },
     content : { type: 'string' },
-    markup : { 
+    markup : {
       type: 'string',
-      defaultsTo: 'html' 
+      defaultsTo: 'html'
     },
-    in_nav : { 
+    in_nav : {
       type: 'boolean',
-      defaultsTo: true 
+      defaultsTo: true
     },
     final_content: function () {
       if(this.markup === 'markdown'){
@@ -60,4 +60,3 @@ module.exports = {
     next();
   }
 };
-

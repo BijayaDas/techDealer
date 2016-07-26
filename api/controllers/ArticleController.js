@@ -1,5 +1,5 @@
 /**
- * ArticleController.js 
+ * ArticleController.js
  *
  * @description ::
  * @docs        :: http://sailsjs.org/#!documentation/controllers
@@ -36,24 +36,44 @@ module.exports = {
    */
 
   show: function (req, res) {
+    // sails.log.debug(req.param('id'));
     Article.findOne(req.param('id')).populate('comments')
     .then(function (article) {
-      // TODO figure out how to populate nested comments
-      // var comments = Comment.find({
-      //   'where':{
-      //     'article': article.id, 
-      //     // 'parent':null 
-      //   }
-      // }).populate('children').then(function (comments) {
-      //   return comments
-      // })
-      return [article, article.comments]
+      //  figure out how to populate nested comments
+      // sails.log.debug(article);
+        var comments = Comment.find({
+          'where':{
+            'article': article.id,
+            'parent':null
+          }
+        }).populate('children').then(function (comments) {
+          return comments
+        });
+        // sails.log.debug(article.comments);
+        return [article, article.comments]
     }).spread(function (article, comments) {
-      res.view({article: article, comments: comments, page_title: article.title});
-    }).fail(function(err){
-      return next(err);
-      res.redirect('/');
-    });
+      sails.log.debug(article.comments);
+      
+      res.view({article: article, comments: comments});
+    })
+    // Article.findOne(req.param('id')).populate('comments')
+    // .then(function (article) {
+    //   //  figure out how to populate nested comments
+    //   var comments = Comment.find({
+    //     'where':{
+    //       'article': article.id,
+    //       // 'parent':null
+    //     }
+    //   }).populate('children').then(function (comments) {
+    //     return comments
+    //   })
+    //   return [article, article.comments]
+    // }).spread(function (article, comments) {
+    //   res.view({article: article, comments: comments, page_title: article.title});
+    // }).fail(function(err){
+    //   return next(err);
+    //   res.redirect('/');
+    // });
   },
 
   /**
@@ -74,7 +94,7 @@ module.exports = {
     Article.create(req.params.all(), function (err, article) {
       if (err) return next(err);
       // console.log(article)
-      res.redirect('article');      
+      res.redirect('article');
     })
   },
 
@@ -119,7 +139,7 @@ module.exports = {
       if (err) return next(err);
       // console.log(page)
       article = article || {};
-      
+
       article.destroy(function (err) {
         res.redirect('/')
       });

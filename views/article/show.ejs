@@ -1,16 +1,1 @@
 <%- partial('partials/article') %>
- <div class='comments'>
- <% if(comments.length > 0){ %>
-    <div>
-      <!-- <small class='text-muted'><%= article.comments.length %> comments:</small> -->
-      <% if(comments.length > 3){ %>
-        <%- partial('partials/comment_form', {article: article}) %>
-      <% } %>
-      <% comments.forEach(function(comment){ %>
-        <%- partial('partials/comment', {comment: comment}) %>
-      <% }) %>
-    </div>
-    <hr>
-  <% } %>
-  <%- partial('partials/comment_form', {article: article}) %>
-</div>
