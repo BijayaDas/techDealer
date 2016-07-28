@@ -11,7 +11,8 @@ var PostCategory = new keystone.List('PostCategory', {
 
 PostCategory.add({
 	name: { type: String, required: true },
-	// catImage: { type: Types.CloudinaryImage },
+	image_url: { type: String, required: true, default: 'images/' },
+	tags: { type: Types.TextArray },
 });
 
 PostCategory.relationship({ ref: 'Post', path: 'categories' });

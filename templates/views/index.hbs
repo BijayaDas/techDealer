@@ -1,6 +1,6 @@
 {{!< default}}
 <!-- BEGIN CONTAINER -->
-<div class="wrapper">
+<div class="wrapper" style="background-color: #fff;">
     <!-- BEGIN HEADER -->
    {{> header}}
     <!-- END HEADER -->
@@ -14,9 +14,8 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Pages</a>
+                        <a href="#">Courses</a>
                     </li>
-                    <li class="active">General</li>
                 </ol>
                 <!-- Sidebar Toggle Button -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -40,32 +39,29 @@
                         <!-- BEGIN PAGE BASE CONTENT -->
                         <div class="blog-page blog-content-1">
                             <div class="row">
+                            {{# each data.courses }}
                                 <div class="col-md-4">
                                     <div class="blog-post-sm bordered blog-container">
                                         <div class="blog-img-thumb">
-                                            <a href="javascript:;">
-                                                <img src="/images/pages/img/page_general_search/03.jpg" />
+                                            <a href="{{{req.headers.host}}}/blog/{{{key}}}">
+                                                <img src="{{{image_url}}}" />
                                             </a>
                                         </div>
                                         <div class="blog-post-content">
                                             <h2 class="blog-title blog-post-title">
-                                                <a href="javascript:;">Metronic Blog Post</a>
+                                                <a href="javascript:;">{{name}}</a>
                                             </h2>
-                                            <p class="blog-post-desc"> Lorem ipsum dolor sit amet adipiscing elit, sed diam nonummy </p>
+                                            {{!-- <p class="blog-post-desc"></p>  if you need the description then uncomment it. --}}
                                             <div class="blog-post-foot">
                                                 <ul class="blog-post-tags">
+                                                {{# each tags }}
                                                     <li class="uppercase">
-                                                        <a href="javascript:;">Bootstrap</a>
+                                                        <a href="javascript:;">{{this}}</a>
                                                     </li>
-                                                    <li class="uppercase">
-                                                        <a href="javascript:;">Sass</a>
-                                                    </li>
-                                                    <li class="uppercase">
-                                                        <a href="javascript:;">HTML</a>
-                                                    </li>
+                                                 {{/each}}   
                                                 </ul>
                                             </div>
-                                            <div class="blog-post-foot">
+                                   {{!--          <div class="blog-post-foot">
                                                 <div class="blog-post-meta">
                                                     <i class="icon-calendar font-blue"></i>
                                                     <a href="javascript:;">Oct 24, 2015</a>
@@ -74,10 +70,11 @@
                                                     <i class="icon-bubble font-blue"></i>
                                                     <a href="javascript:;">14 Comments</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
+                            {{/each}}
                             </div>
                         </div>
                         <!-- END PAGE BASE CONTENT -->
