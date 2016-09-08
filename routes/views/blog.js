@@ -20,7 +20,7 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 		keystone.list('PostCategory').model.find().sort('name').exec(function (err, results) {
-
+// console.log("Hell o ee");
 			if (err || !results.length) {
 				return next(err);
 			}
@@ -47,6 +47,7 @@ exports = module.exports = function (req, res) {
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
 				locals.data.category = result;
+				// console.log(result);
 				next(err);
 			});
 		} else {
@@ -59,13 +60,13 @@ exports = module.exports = function (req, res) {
 
 		var q = keystone.list('Post').paginate({
 			page: req.query.page || 1,
-			perPage: 10,
-			maxPages: 10,
+			// perPage: 10,
+			// maxPages: 10,
 			filters: {
 				state: 'published',
 			},
 		})
-			.sort('-publishedDate')
+			.sort('name')
 			.populate('author categories');
 
 		if (locals.data.category) {

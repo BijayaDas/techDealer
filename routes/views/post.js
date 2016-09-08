@@ -25,8 +25,8 @@ exports = module.exports = function (req, res) {
 			locals.data.post = result;
 			keystone.list('Post').model.where('categories').in([locals.data.post.categories[0]._id]).exec(function (err, posts) {
 				locals.data.post_col = posts;
-				console.log(locals.data.post.categories[0]._id);
-				console.log(locals.data.post_col);
+				// console.log(locals.data.post.categories[0]._id);
+				// console.log(locals.data.post_col);
 			});
 			next(err);
 		});
