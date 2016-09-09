@@ -34,6 +34,19 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	// 'wysiwyg cloudinary images': true,
+	'wysiwyg override toolbar': false,
+	'wysiwyg menubar': true,
+	'wysiwyg skin': 'lightgray',
+	'wysiwyg additional buttons': 'searchreplace visualchars,'
+	 + ' charmap ltr rtl pagebreak paste, forecolor backcolor,'
+	 +' emoticons media, preview print ',
+	'wysiwyg additional plugins': 'example, table, advlist, anchor,'
+	 + ' autolink, autosave, charmap, contextmenu, '
+	 + ' directionality, emoticons, fullpage, hr, media, pagebreak,'
+	 + ' paste, preview, print, searchreplace, textcolor,'
+	 + ' visualblocks, visualchars, wordcount, legacyoutput',
+	'wysiwyg images': true,
 });
 
 // Load your project's Models
@@ -85,7 +98,7 @@ keystone.set('nav', {
 	enquiries: 'enquiries',
 	users: 'users',
 });
-
+keystone.set('baseUrl', (keystone.get('env') == 'production') ? 'http://techdealer.in/' : 'http://techdealer.in/');
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();

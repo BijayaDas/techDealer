@@ -7,7 +7,7 @@
         <div class="page-content">
             <!-- BEGIN BREADCRUMBS -->
             <div class="breadcrumbs">
-                <h1>Topics</h1>
+                <h1>{{{ categoryList data.post.categories }}}</h1>
                 <ol class="breadcrumb">
                     <li>
                         <a href="#">Home</a>
@@ -53,7 +53,20 @@
 								<div class="row">
 									<div class="col-sm-10 col-md-8">
 										<article>
-											<p><a href="/blog">&larr; back to the blog</a></p>
+											<div>
+                        <span>
+                          <a href="/blog" class="btn btn-default mt-ladda-btn ladda-button btn-circle" >
+                              <span class="ladda-label">
+                                <i class="icon-arrow-left"></i> Back
+                              </span>
+                          </a>
+                        </span>
+                        <span class="pull-right">Share with
+                          <a class="socicon-btn socicon-btn-circle socicon-lg socicon-solid bg-green font-white socicon-twitter tooltips" data-original-title="Twitter" href="https://twitter.com/intent/tweet?text={{data.post.title}}&url={{data.post.fullPostUrl}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">Twitter</a>
+                          <a class="socicon-btn socicon-btn-circle socicon-lg socicon-solid bg-blue font-white socicon-facebook tooltips" data-original-title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{data.post.fullPostUrl}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"></a>
+                          <a class="socicon-btn socicon-btn-circle socicon-lg socicon-solid bg-red font-white socicon-google tooltips" data-original-title="Google+" href="https://plus.google.com/share?url={{data.post.fullPostUrl}}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"></a>
+                        </span>
+                        </div>
 											<hr>
 											<header>
 												<h1>{{data.post.title}}</h1>
@@ -70,6 +83,13 @@
 												{{#if data.post.image}}<img src="{{{cloudinaryUrl data.post.image width=750 height=450 crop='fit' }}}" class="img-responsive">{{/if}}
 												{{{data.post.content.extended}}}
 											</div>
+                      <div class="post">
+                        {{#if data.post.content.video.html}}
+                            {{{data.post.content.video.html}}}
+                        {{else}}
+                            {{{data.post.content.extended}}}
+                        {{/if}}
+                      </div>
 										</article>
 									</div>
 								</div>
@@ -86,4 +106,3 @@
     </div>
   </div>
   <!-- END CONTAINER -->
-

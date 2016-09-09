@@ -20,12 +20,22 @@ Post.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
+		video: { type: Types.Html, wysiwyg: true, height: 200 },
 	},
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
+	meta: {
+			 title: { type: String },
+			 description: { type: String }
+	 },
 });
 
 Post.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
+});
+
+//in models/Post.js
+Post.schema.virtual('fullPostUrl').get(function() {
+    return keystone.get('baseUrl') + 'blog/post/' + this.slug;
 });
 
 Post.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';

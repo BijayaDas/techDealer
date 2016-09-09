@@ -8,7 +8,7 @@
  * modules in your project's /lib directory.
  */
 var _ = require('lodash');
-
+var keystone = require('keystone')
 
 /**
 	Initialises the standard view locals
@@ -24,6 +24,8 @@ exports.initLocals = function (req, res, next) {
 		// { label: 'Gallery', key: 'gallery', href: '/gallery' },
 		{ label: 'Contact', key: 'contact', href: '/contact' },
 	];
+	//in routes/middleware.js in initLocals function
+	res.locals.baseUrl = keystone.get('baseUrl');
 	res.locals.user = req.user;
 	next();
 };
