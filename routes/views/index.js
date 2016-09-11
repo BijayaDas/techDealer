@@ -18,7 +18,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.courses = results;
-			console.log(results);
+			// console.log(results);
 			next(err);
 		});
 // debugger;
